@@ -21,6 +21,8 @@ public class Game {
      */
     State state = State.X_MOVE;
 
+    private Move lastMove;
+
     public Game(int size) {
         this.size = size;
         field = new Cell[size][size];
@@ -42,10 +44,11 @@ public class Game {
     /**
      * Ход
      *
-     * @param x координата по горизонтали (столбец)
-     * @param y координата по вертикали (строка)
+     * @param move - объект с ходом
      */
-    public void move(int x, int y) throws UserException {
+    public void move(Move move) throws UserException {
+        int x = move.x;
+        int y = move.y;
         if (x < 0 || x >= size)
             throw new UserException("x за пределами поля");
         if (y < 0 || y >= size)
@@ -63,6 +66,7 @@ public class Game {
             default:
                 throw new UserException("Ход невозможен!");
         }
+        lastMove = move;
     }
 
     public enum State {
@@ -76,6 +80,48 @@ public class Game {
 
         State(String name) {
             this.name = name;
+        }
+    }
+
+    public boolean isGameFinished() {
+        if(state == State.X_WINS || state == State.O_WINS || state == State.DRAW)
+            return true;
+        else
+            return false;
+    }
+
+    public void switchState() {
+        if(!isGameFinished()) {
+            if(state == State.X_MOVE) {
+                state = State.O_MOVE;
+            } else if(state == State.O_MOVE) {
+                state = State.X_MOVE;
+            }
+        }
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public Cell[][] getField() {
+        return this.field;
+    }
+
+    public void checkForWinner() {
+        boolean gameFinished = true;
+        Cell checkedValue = null;
+
+        if(state == State.X_MOVE) {
+            checkedValue = Cell.X;
+        } else if(state == State.O_MOVE) {
+            checkedValue = Cell.O;
+        }
+        int count = 0;
+        for(int i = 0; i < getSize(); i++) {
+            if(field[i][lastMove.y] == checkedValue) {
+
+            }
         }
     }
 }

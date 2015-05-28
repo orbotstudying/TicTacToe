@@ -16,7 +16,7 @@ public class GameTest {
         assertEquals(Game.State.X_MOVE, game.state);
 
         // Ходим в верхний левый угол
-        game.move(0, 0);
+        game.move(new Move(0, 0));
         assertEquals(Cell.X, game.field[0][0]);
     }
 }

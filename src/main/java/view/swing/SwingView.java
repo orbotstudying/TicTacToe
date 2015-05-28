@@ -1,6 +1,7 @@
 package view.swing;
 
 import model.Game;
+import model.Move;
 import view.GameView;
 
 import javax.swing.*;
@@ -19,5 +20,10 @@ public class SwingView implements GameView {
 
     public void render(Game game) {
 
+    }
+
+    @Override
+    public Move inputMove() {
+        return null;
     }
 }
