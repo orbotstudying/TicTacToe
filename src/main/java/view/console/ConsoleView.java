@@ -11,13 +11,22 @@ import java.util.Scanner;
  * Запуск консольного варианта игры
  */
 public class ConsoleView implements GameView {
-    private static final String DELIMITTER = "====================";
+    private static final String SEPARATOR = "====================";
     public ConsoleView() {
         System.out.println("Игра Крестики-нолики");
-        System.out.println(DELIMITTER);
+        System.out.println(SEPARATOR);
     }
 
     public void render(Game game) {
+        if(game.getState() == Game.State.X_MOVE) {
+            System.out.println("===Ход крестиков!===");
+        } else if(game.getState() == Game.State.O_MOVE) {
+            System.out.println("====Ход ноликов!====");
+        }
+        for(int i = 0; i < game.getSize(); i++) {
+            System.out.print(" ___");
+        }
+        System.out.println();
         for(int i = 0; i < game.getSize(); i++) {
             for(int j = 0; j < game.getSize(); j++) {
                 if(game.getField()[j][i] == Cell.X) {
@@ -33,7 +42,16 @@ public class ConsoleView implements GameView {
             System.out.println("|");
         }
         System.out.println();
-        System.out.println(DELIMITTER);
+        System.out.println(SEPARATOR);
+
+        if(game.getState() == Game.State.O_WINS) {
+            System.out.println("***===Нолики победили!===***");
+        } else if(game.getState() == Game.State.X_WINS) {
+            System.out.println("***===Крестики победили!===***");
+        } else if(game.getState() == Game.State.DRAW) {
+            System.out.println("===Ничья :(===");
+        }
+        System.out.println(SEPARATOR);
     }
 
     @Override

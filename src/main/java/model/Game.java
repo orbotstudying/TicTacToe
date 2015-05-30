@@ -84,10 +84,14 @@ public class Game {
     }
 
     public boolean isGameFinished() {
-        if(state == State.X_WINS || state == State.O_WINS || state == State.DRAW)
-            return true;
-        else
-            return false;
+        switch (state) {
+            case X_WINS:
+            case O_WINS:
+            case DRAW:
+                return true;
+            default:
+                return false;
+        }
     }
 
     public void switchState() {
@@ -109,19 +113,43 @@ public class Game {
     }
 
     public void checkForWinner() {
-        boolean gameFinished = true;
         Cell checkedValue = null;
-
+        State checkedState = null;
         if(state == State.X_MOVE) {
             checkedValue = Cell.X;
+            checkedState = State.X_WINS;
         } else if(state == State.O_MOVE) {
             checkedValue = Cell.O;
+            checkedState = State.O_WINS;
         }
-        int count = 0;
+
+        int countX = 0;
+        int countY = 0;
+        int countPrimeDiag = 0;
+        int countSecDiag = 0;
         for(int i = 0; i < getSize(); i++) {
             if(field[i][lastMove.y] == checkedValue) {
-
+                countX++;
+            }
+            if(field[lastMove.x][i] == checkedValue) {
+                countY++;
             }
         }
+
+        if((lastMove.x == lastMove.y) || lastMove.x == size - 1 - lastMove.y) {
+            for(int i = 0; i < size; i++) {
+                if(field[i][i] == checkedValue) {
+                    countPrimeDiag++;
+                }
+                if(field[i][size - 1 - i] == checkedValue) {
+                    countSecDiag++;
+                }
+            }
+        }
+
+        if(countX == size || countY == size || countPrimeDiag == size || countSecDiag == size) {
+            state = checkedState;
+        }
+
     }
 }
