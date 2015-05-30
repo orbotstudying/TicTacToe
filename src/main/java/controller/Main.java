@@ -27,6 +27,7 @@ public class Main {
                 }
                 game.move(gameView.inputMove());
                 game.checkForWinner();
+                game.checkForDraw();
                 gameView.render(game);
                 game.switchState();
             } catch (UserException e) {
