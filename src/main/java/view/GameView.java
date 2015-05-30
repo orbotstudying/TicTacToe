@@ -9,5 +9,6 @@ import model.Move;
 public interface GameView {
     void render(Game game);
     Move inputMove();
+    void showMessage(String message);
 
 }

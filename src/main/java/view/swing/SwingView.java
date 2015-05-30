@@ -26,4 +26,9 @@ public class SwingView implements GameView {
     public Move inputMove() {
         return null;
     }
+
+    @Override
+    public void showMessage(String message) {
+
+    }
 }

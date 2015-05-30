@@ -20,16 +20,16 @@ public class Main {
         while(!game.isGameFinished()) {
             try {
                 if(game.getState() == Game.State.X_MOVE) {
-                    System.out.println("Ход крестиков: ");
+                    gameView.showMessage("Ход крестиков: ");
                 } else if(game.getState() == Game.State.O_MOVE) {
-                    System.out.println("Ход ноликов");
+                    gameView.showMessage("Ход ноликов");
                 }
                 game.move(gameView.inputMove());
                 game.checkForWinner();
                 gameView.render(game);
                 game.switchState();
             } catch (UserException e) {
-                System.out.println(e + "Повторите снова");
+                gameView.showMessage(e + "Повторите снова");
             }
         }
     }

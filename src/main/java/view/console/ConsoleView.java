@@ -61,4 +61,9 @@ public class ConsoleView implements GameView {
         int y = scanner.nextInt();
         return new Move(x, y);
     }
+
+    @Override
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
 }
