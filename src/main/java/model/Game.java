@@ -154,14 +154,16 @@ public class Game {
     }
 
     public void checkForDraw() {
+        boolean draw = true;
         if(!isGameFinished()) {
             for (int i = 0; i < getSize(); i++) {
                 for (int j = 0; j < getSize(); j++) {
                     if (field[i][j] != Cell.EMPTY) {
-                        state = State.DRAW;
+                        draw = false;
                     }
                 }
             }
+            if(draw) state = State.DRAW;
         }
     }
 }
