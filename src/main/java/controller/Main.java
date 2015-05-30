@@ -13,10 +13,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Введите размер поля");
+        GameView gameView = new ConsoleView();
+        gameView.showMessage("Введите размер поля");
         int size = new Scanner(System.in).nextInt();
         Game game = new Game(size);
-        GameView gameView = new ConsoleView();
+
         while(!game.isGameFinished()) {
             try {
                 if(game.getState() == Game.State.X_MOVE) {
